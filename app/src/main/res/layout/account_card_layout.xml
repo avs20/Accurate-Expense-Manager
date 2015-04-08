@@ -56,13 +56,14 @@
             android:id="@+id/accAmountTextView"
             android:textSize="25dp"
             android:typeface="monospace"
-
+            android:layout_alignParentRight="true"
             android:layout_below="@+id/accCardDivider"
             android:layout_toRightOf="@+id/accBalTextView"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_marginLeft="209dp"
-            android:layout_marginStart="209dp"
+            android:layout_marginRight="10dp"
+
             android:textColor="#ff4adf58" />
     </RelativeLayout>
 
