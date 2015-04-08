@@ -1,12 +1,21 @@
 package siolabs.badmotherfucker.Activity;
 
+import android.app.Dialog;
+import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,16 +31,23 @@ public class ViewAccount extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_account);
         
+        //get all the existing accounts
         RecyclerView accRecyclerView = (RecyclerView)findViewById(R.id.accountList);
         accRecyclerView.setHasFixedSize(true);
         LinearLayoutManager accountLlm = new LinearLayoutManager(this);
         accountLlm.setOrientation(LinearLayoutManager.VERTICAL);
-        
         accRecyclerView.setLayoutManager(accountLlm);
-
         AccountAdapter aa = new AccountAdapter(createAccount(4));
-        
         accRecyclerView.setAdapter(aa);
+        
+        //show the button 
+        Button addNewAcc = (Button) findViewById(R.id.addNewAccBtn);
+        addNewAcc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAddNewAccountDialog();
+            }
+        });
     }
 
     private List<Account> createAccount(int i) {
@@ -67,5 +83,47 @@ public class ViewAccount extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    
+    
+    /* function to show the add new Accounr Dialog box*/
+    private void showAddNewAccountDialog(){
+        // Create custom dialog object
+        final Dialog dialog = new Dialog(this);
+        // hide to default title for Dialog
+        //dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        // inflate the layout dialog_layout.xml and set it as contentView
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.dialog_add_account,  null, false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setContentView(view);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+
+        EditText accNameEditText = (EditText) dialog.findViewById(R.id.addAccNameEditText);
+        EditText accBalEditText = (EditText) dialog.findViewById(R.id.addAccBalEditText);
+        Button doneBtn = (Button) dialog.findViewById(R.id.doneBtn);
+        doneBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO save the account
+                Toast.makeText(getApplicationContext(),"DOne Clicked",Toast.LENGTH_LONG).show();
+                //TODO close the dialog and return to View Account Activity
+                dialog.dismiss();
+            }
+        });
+        
+        Button cancelBtn = (Button) dialog.findViewById(R.id.cancelBtn);
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO close the dialog and return to View Account Activity
+                Toast.makeText(getApplicationContext(),"Cancel  Clicked",Toast.LENGTH_LONG).show();
+                dialog.dismiss();
+            }
+        });
+        
+        //display dialog
+        dialog.show();
     }
 }
