@@ -92,13 +92,14 @@ public class ViewAccount extends ActionBarActivity {
         final Dialog dialog = new Dialog(this);
         // hide to default title for Dialog
         //dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setTitle("Add New Account");
 
         // inflate the layout dialog_layout.xml and set it as contentView
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.dialog_add_account,  null, false);
         dialog.setCanceledOnTouchOutside(false);
         dialog.setContentView(view);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+//        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
 
         EditText accNameEditText = (EditText) dialog.findViewById(R.id.addAccNameEditText);
         EditText accBalEditText = (EditText) dialog.findViewById(R.id.addAccBalEditText);
