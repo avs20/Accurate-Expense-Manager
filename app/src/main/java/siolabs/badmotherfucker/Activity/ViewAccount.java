@@ -26,6 +26,7 @@ import siolabs.badmotherfucker.R;
 
 public class ViewAccount extends ActionBarActivity {
 
+    AccountAdapter aa ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,6 +111,8 @@ public class ViewAccount extends ActionBarActivity {
                 //TODO save the account
                 Toast.makeText(getApplicationContext(),"DOne Clicked",Toast.LENGTH_LONG).show();
                 //TODO close the dialog and return to View Account Activity
+                
+                aa.notifyItemChanged(aa.getItemCount());
                 dialog.dismiss();
             }
         });
