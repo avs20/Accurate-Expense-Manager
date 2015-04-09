@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import siolabs.badmotherfucker.Activity.ViewAccount;
+import siolabs.badmotherfucker.Activity.ViewCategory;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -51,7 +52,7 @@ public class MainActivity extends ActionBarActivity {
         /*
          Open the ViewCategorizedSummary Activity
          */
-        Intent i = new Intent(this,ViewAccount.class);
+        Intent i = new Intent(this,ViewCategory.class);
         startActivity(i);
         
 
