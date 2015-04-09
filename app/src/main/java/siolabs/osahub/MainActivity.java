@@ -1,4 +1,4 @@
-package siolabs.badmotherfucker;
+package siolabs.osahub;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,10 +8,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import siolabs.badmotherfucker.Activity.AddNewTransactionActivity;
-import siolabs.badmotherfucker.Activity.ViewAccount;
-import siolabs.badmotherfucker.Activity.ViewAllTransaction;
-import siolabs.badmotherfucker.Activity.ViewCategory;
+import siolabs.osahub.Activity.AddNewTransactionActivity;
+import siolabs.osahub.Activity.ViewAccount;
 
 
 public class MainActivity extends ActionBarActivity {

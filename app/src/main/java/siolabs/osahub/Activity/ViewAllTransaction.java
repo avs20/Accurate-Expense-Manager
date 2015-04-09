@@ -1,4 +1,4 @@
-package siolabs.badmotherfucker.Activity;
+package siolabs.osahub.Activity;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -12,9 +12,9 @@ import android.widget.Button;
 import java.util.ArrayList;
 import java.util.List;
 
-import siolabs.badmotherfucker.Adapter.TransactionAdapter;
-import siolabs.badmotherfucker.Entity.Transaction;
-import siolabs.badmotherfucker.R;
+import siolabs.osahub.Adapter.TransactionAdapter;
+import siolabs.osahub.Entity.Transaction;
+import siolabs.osahub.R;
 
 public class ViewAllTransaction extends ActionBarActivity {
 

@@ -1,18 +1,15 @@
-package siolabs.badmotherfucker.Adapter;
+package siolabs.osahub.Adapter;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
-import siolabs.badmotherfucker.Entity.Transaction;
-import siolabs.badmotherfucker.R;
+import siolabs.osahub.Entity.Transaction;
+import siolabs.osahub.R;
 
 /**
  * Created by ashutoshsingh on 09-04-2015.

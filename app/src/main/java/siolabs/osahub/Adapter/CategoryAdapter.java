@@ -1,4 +1,4 @@
-package siolabs.badmotherfucker.Adapter;
+package siolabs.osahub.Adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,9 +8,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import siolabs.badmotherfucker.Entity.Account;
-import siolabs.badmotherfucker.Entity.Category;
-import siolabs.badmotherfucker.R;
+import siolabs.osahub.Entity.Category;
+import siolabs.osahub.R;
 
 /**
  * Created by ashutoshsingh on 08-04-2015.

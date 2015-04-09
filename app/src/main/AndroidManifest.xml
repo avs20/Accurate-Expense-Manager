@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="siolabs.badmotherfucker" >
+    package="siolabs.osahub" >
 
     <application
         android:allowBackup="true"
@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name="siolabs.osahub.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,19 +17,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity.ViewAccount"
+            android:name="siolabs.osahub.Activity.ViewAccount"
             android:label="@string/title_activity_view_account" >
         </activity>
         <activity
-            android:name=".Activity.ViewCategory"
+            android:name="siolabs.osahub.Activity.ViewCategory"
             android:label="@string/title_activity_view_account" >
         </activity>
         <activity
-            android:name=".Activity.ViewAllTransaction"
+            android:name="siolabs.osahub.Activity.ViewAllTransaction"
             android:label="@string/title_activity_view_all_transaction" >
         </activity>
         <activity
-            android:name=".Activity.AddNewTransactionActivity"
+            android:name="siolabs.osahub.Activity.AddNewTransactionActivity"
             android:label="@string/title_activity_add_new_transaction" >
         </activity>
     </application>

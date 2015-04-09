@@ -1,11 +1,11 @@
-package siolabs.badmotherfucker.Activity;
+package siolabs.osahub.Activity;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -18,51 +18,60 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import siolabs.badmotherfucker.Adapter.AccountAdapter;
-import siolabs.badmotherfucker.Adapter.CategoryAdapter;
-import siolabs.badmotherfucker.Entity.Account;
-import siolabs.badmotherfucker.Entity.Category;
-import siolabs.badmotherfucker.R;
+import siolabs.osahub.Adapter.AccountAdapter;
+import siolabs.osahub.Adapter.CategoryAdapter;
+import siolabs.osahub.Entity.Account;
+import siolabs.osahub.Entity.Category;
+import siolabs.osahub.R;
 
-public class ViewCategory extends ActionBarActivity {
+public class ViewAccount extends ActionBarActivity {
 
-    
+    AccountAdapter aa ;
     CategoryAdapter ca;
-    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_category);
+        setContentView(R.layout.activity_view_account);
         
         //get all the existing accounts
-        RecyclerView accRecyclerView = (RecyclerView)findViewById(R.id.catList);
+        RecyclerView accRecyclerView = (RecyclerView)findViewById(R.id.accountList);
         accRecyclerView.setHasFixedSize(true);
         LinearLayoutManager accountLlm = new LinearLayoutManager(this);
         accountLlm.setOrientation(LinearLayoutManager.VERTICAL);
         accRecyclerView.setLayoutManager(accountLlm);
+        aa = new AccountAdapter(createAccount(4));
+        accRecyclerView.setAdapter(aa);
 
+        //show the button 
+        Button addNewAcc = (Button) findViewById(R.id.addNewAccBtn);
+        addNewAcc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAddNewAccountDialog();
+            }
+        });
+        
         //category  testin
         ca = new CategoryAdapter(createCategory(5));
         accRecyclerView.setAdapter(ca);
         
-        //show the button 
-//        Button addNewAcc = (Button) findViewById(R.id.addNewCatBtn);
-//        addNewAcc.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showAddNewCategoryDialog();
-//            }
-//        });
-//
-        
-        
-         
+
 
         
         
     }
 
-
+    private List<Account> createAccount(int i) {
+        List<Account> accList = new ArrayList<Account>();
+        for(int j = 0; j<i;j++){
+            Account ac = new Account();
+            ac.setAccountName("Account" + i + "_" + j);
+            ac.setBalanceAmt(1000);
+            accList.add(ac);
+        }
+        Log.d("DEBUG","Size of list "+ accList.size());
+        return  accList;
+    }
     
     private List<Category> createCategory(int i ){
         List<Category> catList = new ArrayList<Category>();
@@ -124,7 +133,7 @@ public class ViewCategory extends ActionBarActivity {
                 Toast.makeText(getApplicationContext(),"DOne Clicked",Toast.LENGTH_LONG).show();
                 //TODO close the dialog and return to View Account Activity
                 
-                ca.notifyItemChanged(ca.getItemCount());
+                aa.notifyItemChanged(aa.getItemCount());
                 dialog.dismiss();
             }
         });

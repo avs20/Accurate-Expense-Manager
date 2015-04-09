@@ -1,4 +1,4 @@
-package siolabs.badmotherfucker;
+package siolabs.osahub;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

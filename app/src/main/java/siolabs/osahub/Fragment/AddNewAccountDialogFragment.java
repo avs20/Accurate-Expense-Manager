@@ -1,4 +1,4 @@
-package siolabs.badmotherfucker.Fragment;
+package siolabs.osahub.Fragment;
 
 import android.app.Activity;
 import android.app.DialogFragment;
@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import siolabs.badmotherfucker.R;
+import siolabs.osahub.R;
 
 /**
  * A simple {@link Fragment} subclass.

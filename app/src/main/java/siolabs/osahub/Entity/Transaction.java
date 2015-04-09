@@ -1,4 +1,4 @@
-package siolabs.badmotherfucker.Entity;
+package siolabs.osahub.Entity;
 
 import java.util.Date;
 

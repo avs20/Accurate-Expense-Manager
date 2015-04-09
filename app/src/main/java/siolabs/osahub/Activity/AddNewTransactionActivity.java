@@ -1,4 +1,4 @@
-package siolabs.badmotherfucker.Activity;
+package siolabs.osahub.Activity;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -12,12 +12,9 @@ import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import java.sql.Date;
 import java.util.Calendar;
 
-import siolabs.badmotherfucker.R;
+import siolabs.osahub.R;
 
 public class AddNewTransactionActivity extends ActionBarActivity {
 

@@ -1,4 +1,4 @@
-package siolabs.badmotherfucker.Entity;
+package siolabs.osahub.Entity;
 
 /**
  * Created by ashutoshsingh on 08-04-2015.
