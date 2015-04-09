@@ -23,23 +23,29 @@ import siolabs.osahub.Adapter.CategoryAdapter;
 import siolabs.osahub.Entity.Account;
 import siolabs.osahub.Entity.Category;
 import siolabs.osahub.R;
+import siolabs.osahub.database.ExpenseDatabaseHelper;
 
 public class ViewAccount extends ActionBarActivity {
 
     AccountAdapter aa ;
     CategoryAdapter ca;
+    ExpenseDatabaseHelper dbHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_account);
-        
+
+        //initialize the dbhelper
+        dbHelper = new ExpenseDatabaseHelper(this);
+
         //get all the existing accounts
         RecyclerView accRecyclerView = (RecyclerView)findViewById(R.id.accountList);
         accRecyclerView.setHasFixedSize(true);
         LinearLayoutManager accountLlm = new LinearLayoutManager(this);
         accountLlm.setOrientation(LinearLayoutManager.VERTICAL);
         accRecyclerView.setLayoutManager(accountLlm);
-        aa = new AccountAdapter(createAccount(4));
+        aa = new AccountAdapter(this,dbHelper,"");
         accRecyclerView.setAdapter(aa);
 
         //show the button 
@@ -50,10 +56,13 @@ public class ViewAccount extends ActionBarActivity {
                 showAddNewAccountDialog();
             }
         });
+
+
+
         
         //category  testin
-        ca = new CategoryAdapter(createCategory(5));
-        accRecyclerView.setAdapter(ca);
+//        ca = new CategoryAdapter(createCategory(5));
+//        accRecyclerView.setAdapter(ca);
         
 
 
@@ -73,16 +82,13 @@ public class ViewAccount extends ActionBarActivity {
         return  accList;
     }
     
-    private List<Category> createCategory(int i ){
-        List<Category> catList = new ArrayList<Category>();
-        for(int j = 0 ;j < i ;j ++){
-            Category cat = new Category();
-            cat.setCategoryName("Category__" + i + "  " + j);
-            cat.setSpentAmt(1000);
-            catList.add(cat);
-        }
-        return  catList;
-    }
+
+
+
+
+
+
+
 
 
     @Override
@@ -106,6 +112,15 @@ public class ViewAccount extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    //function to add the entry to the database
+    private boolean addNewAccount(Account account){
+        long id = dbHelper.insertAccount(account);
+        if(id > 0)
+                return true;
+        else
+            return false;
+    }
     
     
     /* function to show the add new Accounr Dialog box*/
@@ -123,17 +138,28 @@ public class ViewAccount extends ActionBarActivity {
         dialog.setContentView(view);
 //        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
 
-        EditText accNameEditText = (EditText) dialog.findViewById(R.id.addAccNameEditText);
-        EditText accBalEditText = (EditText) dialog.findViewById(R.id.addAccBalEditText);
+        final EditText accNameEditText = (EditText) dialog.findViewById(R.id.addAccNameEditText);
+        final EditText accBalEditText = (EditText) dialog.findViewById(R.id.addAccBalEditText);
         Button doneBtn = (Button) dialog.findViewById(R.id.doneBtn);
         doneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //TODO save the account
-                Toast.makeText(getApplicationContext(),"DOne Clicked",Toast.LENGTH_LONG).show();
+                String accName = accNameEditText.getText().toString();
+                float accBal = Float.valueOf(accBalEditText.getText().toString());
+                Account ac = new Account();
+                ac.setAccountName(accName);
+                ac.setBalanceAmt(accBal);
+                if(addNewAccount(ac) )
+                {
+                    Toast.makeText(getApplicationContext(),"Account Added Successfully",Toast.LENGTH_LONG).show();
+                    aa.updateList();
+                }
+
+                else
+                    Toast.makeText(getApplicationContext(), "Unable to add account", Toast.LENGTH_LONG);
                 //TODO close the dialog and return to View Account Activity
-                
-                aa.notifyItemChanged(aa.getItemCount());
+
                 dialog.dismiss();
             }
         });

@@ -1,15 +1,19 @@
 package siolabs.osahub.Adapter;
 
+import android.content.Context;
+import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import siolabs.osahub.Entity.Account;
 import siolabs.osahub.R;
+import siolabs.osahub.database.ExpenseDatabaseHelper;
 
 /**
  * Created by ashutoshsingh on 08-04-2015.
@@ -18,11 +22,26 @@ import siolabs.osahub.R;
 public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountViewHolder> {
 
     private List<Account> accList;
+    private ExpenseDatabaseHelper dbHelper;
+    private Cursor cursor;
+    private Context context;
+    private String id;
     
-    public AccountAdapter(List<Account> accountList){
-        this.accList = accountList;
+    public AccountAdapter(Context context, ExpenseDatabaseHelper dbHelper , String id){
+
+        this.dbHelper = dbHelper;
+        this.context  = context;
+        this.id = id;
+        this.accList = dbHelper.getAccount(id);
         
     }
+
+    public void updateList(){
+        this.accList = dbHelper.getAccount(id);
+        notifyDataSetChanged();
+    }
+
+
 
     @Override
     public AccountViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {

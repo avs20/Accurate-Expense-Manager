@@ -52,7 +52,7 @@ public class MainActivity extends ActionBarActivity {
         /*
          Open the ViewCategorizedSummary Activity
          */
-        Intent i = new Intent(this,AddNewTransactionActivity.class);
+        Intent i = new Intent(this,ViewAccount.class);
         startActivity(i);
         
 
