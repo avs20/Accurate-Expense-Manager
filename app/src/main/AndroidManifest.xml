@@ -24,6 +24,10 @@
             android:name=".Activity.ViewCategory"
             android:label="@string/title_activity_view_account" >
         </activity>
+        <activity
+            android:name=".Activity.ViewAllTransaction"
+            android:label="@string/title_activity_view_all_transaction" >
+        </activity>
     </application>
 
 </manifest>
