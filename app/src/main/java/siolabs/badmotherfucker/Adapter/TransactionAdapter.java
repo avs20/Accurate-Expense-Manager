@@ -1,33 +1,61 @@
 package siolabs.badmotherfucker.Adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.util.List;
+
+import siolabs.badmotherfucker.Entity.Transaction;
 import siolabs.badmotherfucker.R;
 
 /**
  * Created by ashutoshsingh on 09-04-2015.
  */
 public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.TransactionViewHolder>{
+    
+    private List<Transaction> transactionList;
+    
+    public TransactionAdapter(List<Transaction> transList){
+        this.transactionList = transList;
+        
+    }
+    
+    public void updateList(List<Transaction> data){
+        
+        transactionList = data;
+        notifyDataSetChanged();
+        
+    }
+    
 
 
     @Override
     public TransactionViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return null;
+
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View itemView = inflater.inflate(R.layout.transaction_list_item_layout,parent,false);
+
+        return new TransactionViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(TransactionViewHolder holder, int position) {
-
+        Transaction t = transactionList.get(position);
+        holder.catName.setText(t.getCatName());
+        holder.amtSpent.setText("Rs "+ t.getAmount());
+        holder.date.setText(t.getDateStr());
+        holder.memo.setText(t.getMemo());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return transactionList.size();
     }
 
     class TransactionViewHolder extends RecyclerView.ViewHolder{

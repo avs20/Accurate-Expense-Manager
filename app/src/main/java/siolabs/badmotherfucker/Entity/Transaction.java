@@ -108,6 +108,8 @@ public class Transaction {
     private int id;
     private boolean isExpense;
 
+    public Transaction(){}
+    
     public Transaction(boolean isExpense, int accId, String accName, String dateStr, Date date, int catId, String catName, boolean isLocationSaved, double latitude, double longitude, float amount) {
         this.isExpense = isExpense;
         this.accId = accId;
@@ -141,8 +143,13 @@ public class Transaction {
     private double latitude;
     private double longitude;
     private float amount;
-    
-    
-            
-    
+    private String memo;
+
+    public String getMemo() {
+        return memo;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo;
+    }
 }

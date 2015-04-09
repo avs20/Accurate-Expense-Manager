@@ -2,8 +2,8 @@
 <RelativeLayout  
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/trans_list_item_view"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
 
     <TextView
@@ -30,17 +30,20 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Medium Text"
-        android:layout_toLeftOf="@id/catTransDate"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:id="@+id/catTransMemo" />
+        android:layout_below="@id/transAmountSpent"
+
+        android:layout_alignParentRight="true"
+        android:id="@+id/catTransDate" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Medium Text"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:id="@+id/catTransDate" />
+        android:layout_below="@id/catTransName"
+
+        android:layout_alignParentLeft="true"
+        android:id="@+id/catTransMemo" />
+
+    
 </RelativeLayout>
