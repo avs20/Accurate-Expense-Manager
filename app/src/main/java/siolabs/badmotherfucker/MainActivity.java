@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import siolabs.badmotherfucker.Activity.AddNewTransactionActivity;
 import siolabs.badmotherfucker.Activity.ViewAccount;
 import siolabs.badmotherfucker.Activity.ViewAllTransaction;
 import siolabs.badmotherfucker.Activity.ViewCategory;
@@ -53,7 +54,7 @@ public class MainActivity extends ActionBarActivity {
         /*
          Open the ViewCategorizedSummary Activity
          */
-        Intent i = new Intent(this,ViewAllTransaction.class);
+        Intent i = new Intent(this,AddNewTransactionActivity.class);
         startActivity(i);
         
 

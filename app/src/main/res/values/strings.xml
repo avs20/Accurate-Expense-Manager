@@ -7,5 +7,13 @@
     <string name="title_activity_view_account">ViewAccount</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_view_all_transaction">View All Transactions</string>
+    <string name="title_activity_add_new_transaction">AddNewTransactionActivity</string>
+
+    <string-array name="spinnerItems">
+        <item>State Bank of India</item>
+        <item>Central Bank of India</item>
+        <item>HDFC Bank</item>
+        <item>Cash</item>
+    </string-array>
 
 </resources>

@@ -28,6 +28,10 @@
             android:name=".Activity.ViewAllTransaction"
             android:label="@string/title_activity_view_all_transaction" >
         </activity>
+        <activity
+            android:name=".Activity.AddNewTransactionActivity"
+            android:label="@string/title_activity_add_new_transaction" >
+        </activity>
     </application>
 
 </manifest>
