@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteStatement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 import siolabs.osahub.Entity.Account;
 import siolabs.osahub.Entity.Category;
 import siolabs.osahub.Entity.Transaction;
+import siolabs.osahub.R;
 
 /**
  * Created by PIR on 4/9/2015.
@@ -37,11 +39,12 @@ public class ExpenseDatabaseHelper extends SQLiteOpenHelper {
     private final String TABLE_CATEGORY = "category";
     public static final String COLUMN_CATEGORY_NAME = "name";
     public static final String COLUMN_CATEGORY_AMT = "spent_amt";
+    private Context ctx;
 
 
 
     public ExpenseDatabaseHelper(Context context){
-        super(context, DB_NAME, null, VERSION);
+        super(context, DB_NAME, null, VERSION); this.ctx=context;
     }
 
     @Override
@@ -55,6 +58,8 @@ public class ExpenseDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(" CREATE TABLE category (_id integer primary key autoincrement," +
                                                "name text," +
                                                 "spent_amt real)");
+
+
         
         //create the transaction table
         String transTable = " CREATE TABLE transactions (_id integer primary key autoincrement, " +
@@ -65,7 +70,26 @@ public class ExpenseDatabaseHelper extends SQLiteOpenHelper {
                 "trans_date integer)";
         db.execSQL(transTable);
         
-         
+        insertCategoryValues(db);
+
+    }
+
+    private void insertCategoryValues(SQLiteDatabase db) {
+
+
+
+        String[] categories = ctx.getResources().getStringArray(R.array.categoryItems);
+        String sql = "INSERT INTO " +TABLE_CATEGORY + "(name,spent_amt) VALUES(?,?)";
+        SQLiteStatement stmt = db.compileStatement(sql);
+        db.beginTransaction();
+        for(String s : categories){
+            stmt.clearBindings();
+            stmt.bindString(1, s);
+            stmt.bindDouble(2,0.0);
+            stmt.execute();
+        }
+        db.setTransactionSuccessful();
+        db.endTransaction();
 
     }
 

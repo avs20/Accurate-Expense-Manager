@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import siolabs.osahub.Activity.AddNewTransactionActivity;
 import siolabs.osahub.Activity.ViewAccount;
 import siolabs.osahub.Activity.ViewAllTransaction;
+import siolabs.osahub.Activity.ViewCategory;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -41,7 +42,7 @@ public class MainActivity extends ActionBarActivity {
             1.Move to ViewAccount activity
             */
             // TODO Populate Categories
-            Intent i = new Intent(this,ViewAllTransaction.class);
+            Intent i = new Intent(this,ViewCategory.class);
             startActivity(i);
             
 
@@ -53,7 +54,7 @@ public class MainActivity extends ActionBarActivity {
         /*
          Open the ViewCategorizedSummary Activity
          */
-        Intent i = new Intent(this,ViewAllTransaction.class);
+        Intent i = new Intent(this,ViewCategory.class);
         startActivity(i);
         
 

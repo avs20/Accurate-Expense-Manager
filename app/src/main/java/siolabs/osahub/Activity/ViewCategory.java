@@ -20,11 +20,13 @@ import java.util.List;
 import siolabs.osahub.Adapter.CategoryAdapter;
 import siolabs.osahub.Entity.Category;
 import siolabs.osahub.R;
+import siolabs.osahub.database.ExpenseDatabaseHelper;
 
 public class ViewCategory extends ActionBarActivity {
 
     
     CategoryAdapter ca;
+    ExpenseDatabaseHelper dbHelper;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +40,9 @@ public class ViewCategory extends ActionBarActivity {
         accountLlm.setOrientation(LinearLayoutManager.VERTICAL);
         accRecyclerView.setLayoutManager(accountLlm);
 
+        dbHelper = new ExpenseDatabaseHelper(this);
         //category  testin
-        ca = new CategoryAdapter(createCategory(5));
+        ca = new CategoryAdapter(this,dbHelper,"");
         accRecyclerView.setAdapter(ca);
 
          
