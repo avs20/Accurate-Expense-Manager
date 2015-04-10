@@ -20,6 +20,7 @@ import java.util.Calendar;
 
 import siolabs.osahub.Entity.Transaction;
 import siolabs.osahub.R;
+import siolabs.osahub.database.ExpenseDatabaseHelper;
 
 public class AddNewTransactionActivity extends ActionBarActivity {
 
@@ -28,11 +29,15 @@ public class AddNewTransactionActivity extends ActionBarActivity {
     Spinner categoryS;
     TextView datepickerDP;
     EditText amountET;
+    ExpenseDatabaseHelper dbHelper;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_transaction);
+        
+        //get the database 
+        dbHelper = new ExpenseDatabaseHelper(this);
 
         ImageButton datePicker = (ImageButton) findViewById(R.id.datePickerBtn);
         datePicker.setOnClickListener(new View.OnClickListener() {
@@ -72,6 +77,8 @@ public class AddNewTransactionActivity extends ActionBarActivity {
         t.setDateStr(datepickerDP.getText().toString());
         t.setAmount(Float.valueOf(amountET.getText().toString()));
         
+        //TODO check if values is inserted correctly
+        dbHelper.insertTransaction(t);
         
         
     }

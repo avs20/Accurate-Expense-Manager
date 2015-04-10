@@ -26,12 +26,12 @@ public class ExpenseDatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_ACCOUNT_NAME = "name";
     public static final String COLUMN_ACCOUNT_BALANCE = "balance";
     
-    private  final String TABLE_TRANSACTION = "transaction";
+    private  final String TABLE_TRANSACTION = "transactions";
     public  static final String COLUMN_TRANSACTION_ACCOUNT = "acc_name";
     public  static final String COLUMN_TRANSACTION_CATEGORY = "cat_name";
     public  static final String COLUMN_TRANSACTION_AMOUNT = "amount";
     public  static final String COLUMN_TRANSACTION_ISEXPENSE ="is_expense";
-    public  static final String COLUMN_TRANSACTION_DATE = "t_date";
+    public  static final String COLUMN_TRANSACTION_DATE = "trans_date";
             
 
     public ExpenseDatabaseHelper(Context context){
@@ -46,12 +46,13 @@ public class ExpenseDatabaseHelper extends SQLiteOpenHelper {
                                              "balance real)");
         
         //create the transaction table
-        db.execSQL(" CREATE TABLE transaction (_id integer primary key autoincrement, " +
-                                               "acc_name varchar(50)," +
-                                               "cat_name varchar(50)," +
-                                               "amount real," +
-                                               "is_expense varchar(10)," +
-                                               "t_date int");
+        String transTable = " CREATE TABLE transactions (_id integer primary key autoincrement, " +
+                " acc_name text," +
+                " cat_name text," +
+                " amount real," +
+                " is_expense varchar(10)," +
+                "trans_date integer)";
+        db.execSQL(transTable);
         
          
 
@@ -77,6 +78,40 @@ public class ExpenseDatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_TRANSACTION_DATE, t.getDateStr());
         return getWritableDatabase().insert(TABLE_TRANSACTION, null,cv);
     }
+    
+    public List<Transaction> getTransaction(String account)
+    {
+        List<Transaction> list = new ArrayList<Transaction>();
+        //if account is blank then get all transaction ordered by date
+        if(account.length() < 1){
+            Cursor cursor = getReadableDatabase().query(TABLE_TRANSACTION,null,null,null,null,null,null );
+            if ((cursor.moveToFirst()) && cursor.getCount() !=0){
+                Transaction t = new Transaction();
+                t.setAmount(cursor.getFloat(cursor.getColumnIndexOrThrow(COLUMN_TRANSACTION_AMOUNT)));
+                t.setCatName(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TRANSACTION_CATEGORY)));
+                t.setAccName(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TRANSACTION_ACCOUNT)));
+                t.setDateStr(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TRANSACTION_DATE)));
+               
+                list.add(t);
+                
+                cursor.moveToNext();
+                while(!cursor.isAfterLast()){
+                    t = new Transaction();
+                    t.setAmount(cursor.getFloat(cursor.getColumnIndexOrThrow(COLUMN_TRANSACTION_AMOUNT)));
+                    t.setCatName(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TRANSACTION_CATEGORY)));
+                    t.setAccName(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TRANSACTION_ACCOUNT)));
+                    t.setDateStr(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TRANSACTION_DATE)));
+
+                    list.add(t);
+                    
+                }
+            }
+            cursor.close();
+
+        }
+        
+       return list;
+    }
 
     public List<Account> getAccount(String id){
 
@@ -86,7 +121,6 @@ public class ExpenseDatabaseHelper extends SQLiteOpenHelper {
         if ((cursor.moveToFirst()) && cursor.getCount() !=0){
 
 
-            cursor.moveToFirst();
 
             Account account = new Account();
             account.setAccountName(cursor.getString(cursor.getColumnIndexOrThrow(ExpenseDatabaseHelper.COLUMN_ACCOUNT_NAME)));

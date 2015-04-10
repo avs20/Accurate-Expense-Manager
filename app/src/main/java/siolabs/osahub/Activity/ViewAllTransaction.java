@@ -16,6 +16,7 @@ import java.util.List;
 import siolabs.osahub.Adapter.TransactionAdapter;
 import siolabs.osahub.Entity.Transaction;
 import siolabs.osahub.R;
+import siolabs.osahub.database.ExpenseDatabaseHelper;
 
 public class ViewAllTransaction extends ActionBarActivity {
 
@@ -23,6 +24,7 @@ public class ViewAllTransaction extends ActionBarActivity {
     TransactionAdapter ta;
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
+    ExpenseDatabaseHelper dbHelper;
     
     //the buttons for views
     
@@ -38,8 +40,10 @@ public class ViewAllTransaction extends ActionBarActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         
+        dbHelper = new ExpenseDatabaseHelper(this);
+        
         //setting the adapter
-        ta = new TransactionAdapter(createTransaction(10));
+        ta = new TransactionAdapter(this,dbHelper,"");
         recyclerView.setAdapter(ta);
         
         
