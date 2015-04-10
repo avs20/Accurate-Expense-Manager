@@ -1,5 +1,6 @@
 package siolabs.osahub.Activity;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -47,9 +48,17 @@ public class ViewAllTransaction extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 //TODO code here to add a new transaction
+                startNewTransaction();
+                
             }
         });
         
+    }
+
+    private void startNewTransaction() {
+        
+        Intent i = new Intent(this, AddNewTransactionActivity.class);
+        startActivity(i);
     }
 
     private List<Transaction> createTransaction(int i) {

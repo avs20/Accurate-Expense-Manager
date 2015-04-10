@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import siolabs.osahub.Entity.Account;
+import siolabs.osahub.Entity.Transaction;
 
 /**
  * Created by PIR on 4/9/2015.
@@ -20,9 +21,18 @@ public class ExpenseDatabaseHelper extends SQLiteOpenHelper {
     private static final int VERSION = 1;
     public static final String COLUMN_ACCOUNT_ID ="_id" ;
 
+    //AMOUNT TABLE
     private final String TABLE_ACCOUNT = "account";
     public static final String COLUMN_ACCOUNT_NAME = "name";
     public static final String COLUMN_ACCOUNT_BALANCE = "balance";
+    
+    private  final String TABLE_TRANSACTION = "transaction";
+    public  static final String COLUMN_TRANSACTION_ACCOUNT = "acc_name";
+    public  static final String COLUMN_TRANSACTION_CATEGORY = "cat_name";
+    public  static final String COLUMN_TRANSACTION_AMOUNT = "amount";
+    public  static final String COLUMN_TRANSACTION_ISEXPENSE ="is_expense";
+    public  static final String COLUMN_TRANSACTION_DATE = "t_date";
+            
 
     public ExpenseDatabaseHelper(Context context){
         super(context, DB_NAME, null, VERSION);
@@ -34,6 +44,16 @@ public class ExpenseDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(" CREATE TABLE account (_id integer primary key autoincrement," +
                                             "name varchar(50)," +
                                              "balance real)");
+        
+        //create the transaction table
+        db.execSQL(" CREATE TABLE transaction (_id integer primary key autoincrement, " +
+                                               "acc_name varchar(50)," +
+                                               "cat_name varchar(50)," +
+                                               "amount real," +
+                                               "is_expense varchar(10)," +
+                                               "t_date int");
+        
+         
 
     }
 
@@ -47,6 +67,15 @@ public class ExpenseDatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_ACCOUNT_NAME, account.getAccountName());
         cv.put(COLUMN_ACCOUNT_BALANCE, account.getBalanceAmt());
         return getWritableDatabase().insert(TABLE_ACCOUNT,null, cv);
+    }
+    
+    public long insertTransaction(Transaction t){
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_TRANSACTION_AMOUNT, t.getAmount());
+        cv.put(COLUMN_TRANSACTION_CATEGORY, t.getCatName());
+        cv.put(COLUMN_TRANSACTION_ACCOUNT, t.getAccName());
+        cv.put(COLUMN_TRANSACTION_DATE, t.getDateStr());
+        return getWritableDatabase().insert(TABLE_TRANSACTION, null,cv);
     }
 
     public List<Account> getAccount(String id){

@@ -41,22 +41,8 @@ public class ViewCategory extends ActionBarActivity {
         //category  testin
         ca = new CategoryAdapter(createCategory(5));
         accRecyclerView.setAdapter(ca);
-        
-        //show the button 
-//        Button addNewAcc = (Button) findViewById(R.id.addNewCatBtn);
-//        addNewAcc.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showAddNewCategoryDialog();
-//            }
-//        });
-//
-        
-        
-         
 
-        
-        
+         
     }
 
 

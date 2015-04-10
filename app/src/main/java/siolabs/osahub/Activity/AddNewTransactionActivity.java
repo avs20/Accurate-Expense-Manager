@@ -8,16 +8,26 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import java.util.Calendar;
 
+import siolabs.osahub.Entity.Transaction;
 import siolabs.osahub.R;
 
 public class AddNewTransactionActivity extends ActionBarActivity {
 
+    ToggleButton isExpenseTB;
+    Spinner accountS;
+    Spinner categoryS;
+    TextView datepickerDP;
+    EditText amountET;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +42,38 @@ public class AddNewTransactionActivity extends ActionBarActivity {
                 newFragment.show(getSupportFragmentManager(), "datePicker");
             }
         });
+        
+        isExpenseTB = (ToggleButton) findViewById(R.id.toggleBtn);
+        accountS = (Spinner) findViewById(R.id.accountSpinner);
+        categoryS = (Spinner) findViewById(R.id.catSpinner);
+        amountET = (EditText) findViewById(R.id.amountEditText);
+        datepickerDP = (TextView) findViewById(R.id.chosenDateTextView);
+        
+        Button doneTransaction = (Button) findViewById(R.id.doneAddNewTransBtn);
+        doneTransaction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addNewTransaction();
+            }
+        });
+    }
+
+    private void addNewTransaction() {
+        Transaction t = new Transaction();
+        if(isExpenseTB.getText().toString().equalsIgnoreCase("Expense")){
+            //expense
+            t.setExpense(true);
+        }else {
+            t.setExpense(false);
+        }
+        
+        t.setAccName(accountS.getSelectedItem().toString());
+        t.setCatName(accountS.getSelectedItem().toString());
+        t.setDateStr(datepickerDP.getText().toString());
+        t.setAmount(Float.valueOf(amountET.getText().toString()));
+        
+        
+        
     }
 
 
@@ -77,7 +119,7 @@ public class AddNewTransactionActivity extends ActionBarActivity {
             // Use the current date as the default date in the picker
             final Calendar c = Calendar.getInstance();
             int year = c.get(Calendar.YEAR);
-            int month = c.get(Calendar.MONTH);
+            int month = c.get(Calendar.MONTH) + 1;
             int day = c.get(Calendar.DAY_OF_MONTH);
 
             // Create a new instance of DatePickerDialog and return it
