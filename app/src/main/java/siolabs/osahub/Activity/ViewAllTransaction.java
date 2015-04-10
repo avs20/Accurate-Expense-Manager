@@ -62,7 +62,7 @@ public class ViewAllTransaction extends ActionBarActivity {
     private void startNewTransaction() {
         
         Intent i = new Intent(this, AddNewTransactionActivity.class);
-        startActivity(i);
+        startActivityForResult(i,0);
     }
 
     private List<Transaction> createTransaction(int i) {

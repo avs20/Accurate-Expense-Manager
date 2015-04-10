@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import java.util.Calendar;
@@ -65,7 +66,7 @@ public class AddNewTransactionActivity extends ActionBarActivity {
 
     private void addNewTransaction() {
         Transaction t = new Transaction();
-        if(isExpenseTB.getText().toString().equalsIgnoreCase("Expense")){
+        if(isExpenseTB.getText().toString().equalsIgnoreCase("Income")){
             //expense
             t.setExpense(true);
         }else {
@@ -78,7 +79,10 @@ public class AddNewTransactionActivity extends ActionBarActivity {
         t.setAmount(Float.valueOf(amountET.getText().toString()));
         
         //TODO check if values is inserted correctly
-        dbHelper.insertTransaction(t);
+        if(dbHelper.insertTransaction(t) <0)
+            Toast.makeText(this,"Transaction Failed", Toast.LENGTH_LONG).show();
+        else
+            Toast.makeText(this,"Transaction Added Successfully", Toast.LENGTH_LONG).show();
         
         
     }
@@ -139,7 +143,7 @@ public class AddNewTransactionActivity extends ActionBarActivity {
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
             //TODO Code here to set the Date to the object
             this.year = year;
-            this.monthOfYear = monthOfYear +1 ;
+            this.monthOfYear = monthOfYear + 1 ;
             this.dayOfMonth = dayOfMonth;
             date.setText(dayOfMonth + "/" + monthOfYear +"/" + year);
         }
