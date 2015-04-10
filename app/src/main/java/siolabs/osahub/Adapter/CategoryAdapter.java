@@ -1,5 +1,7 @@
 package siolabs.osahub.Adapter;
 
+import android.content.Context;
+import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,7 @@ import java.util.List;
 
 import siolabs.osahub.Entity.Category;
 import siolabs.osahub.R;
+import siolabs.osahub.database.ExpenseDatabaseHelper;
 
 /**
  * Created by ashutoshsingh on 08-04-2015.
@@ -18,10 +21,22 @@ import siolabs.osahub.R;
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
 
     private List<Category> categoryList;
+    private ExpenseDatabaseHelper dbHelper;
+    private Cursor cursor;
+    private Context context;
+    private String id;
 
-    public CategoryAdapter(List<Category> catList){
-        this.categoryList = catList;
+    public CategoryAdapter(Context context, ExpenseDatabaseHelper dbHelper , String id){
+        this.dbHelper = dbHelper;
+        this.context  = context;
+        this.id = id;
+        this.categoryList = dbHelper.getAllCategories(id);
         
+    }
+
+    public void updateList(){
+        this.categoryList = dbHelper.getAllCategories(id);
+        notifyDataSetChanged();
     }
 
     @Override

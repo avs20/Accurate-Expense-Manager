@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import siolabs.osahub.Entity.Account;
+import siolabs.osahub.Entity.Category;
 import siolabs.osahub.Entity.Transaction;
 
 /**
@@ -32,7 +33,12 @@ public class ExpenseDatabaseHelper extends SQLiteOpenHelper {
     public  static final String COLUMN_TRANSACTION_AMOUNT = "amount";
     public  static final String COLUMN_TRANSACTION_ISEXPENSE ="is_expense";
     public  static final String COLUMN_TRANSACTION_DATE = "trans_date";
-            
+
+    private final String TABLE_CATEGORY = "category";
+    public static final String COLUMN_CATEGORY_NAME = "name";
+    public static final String COLUMN_CATEGORY_AMT = "spent_amt";
+
+
 
     public ExpenseDatabaseHelper(Context context){
         super(context, DB_NAME, null, VERSION);
@@ -43,7 +49,12 @@ public class ExpenseDatabaseHelper extends SQLiteOpenHelper {
         //create the account table
         db.execSQL(" CREATE TABLE account (_id integer primary key autoincrement," +
                                             "name varchar(50)," +
-                                             "balance real)");
+                                            "balance real)");
+
+        //create the categories table
+        db.execSQL(" CREATE TABLE category (_id integer primary key autoincrement," +
+                                               "name text," +
+                                                "spent_amt real)");
         
         //create the transaction table
         String transTable = " CREATE TABLE transactions (_id integer primary key autoincrement, " +
@@ -77,6 +88,38 @@ public class ExpenseDatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_TRANSACTION_ACCOUNT, t.getAccName());
         cv.put(COLUMN_TRANSACTION_DATE, t.getDateStr());
         return getWritableDatabase().insert(TABLE_TRANSACTION, null,cv);
+    }
+
+    public List<Category> getAllCategories(String category){
+        List<Category> catList =  new ArrayList<Category>();
+
+        if(category.length()<1){
+            Cursor cursor = getReadableDatabase().query(TABLE_CATEGORY,null,null,null,null,null,null);
+
+            if(cursor.moveToFirst() && cursor.getCount()!=0){
+                //cursor is not empty
+                Category cat = new Category();
+                cat.setCategoryName(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CATEGORY_NAME)));
+                cat.setSpentAmt(cursor.getFloat(cursor.getColumnIndexOrThrow(COLUMN_CATEGORY_AMT)));
+                catList.add(cat);
+
+                while(!cursor.isLast()){
+                    cursor.moveToNext();
+                    cat = new Category();
+                    cat.setCategoryName(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CATEGORY_NAME)));
+                    cat.setSpentAmt(cursor.getFloat(cursor.getColumnIndexOrThrow(COLUMN_CATEGORY_AMT)));
+                    catList.add(cat);
+
+                }
+
+            }
+            cursor.close();
+
+
+
+        }
+
+        return catList;
     }
     
     public List<Transaction> getTransaction(String account)
@@ -144,4 +187,5 @@ public class ExpenseDatabaseHelper extends SQLiteOpenHelper {
         return list;
 
     }
+
 }

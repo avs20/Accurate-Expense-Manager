@@ -10,10 +10,19 @@
     <string name="title_activity_add_new_transaction">AddNewTransactionActivity</string>
 
     <string-array name="spinnerItems">
-        <item>State Bank of India</item>
-        <item>Central Bank of India</item>
-        <item>HDFC Bank</item>
         <item>Cash</item>
+        <item>Savings Account</item>
+        <item>Udhaar</item>
     </string-array>
+
+    <string-array name="categoryItems">
+         <item>Groceries</item>
+         <item>Transport</item>
+         <item>Study</item>
+         <item>Party</item>
+         <item>Gifts</item>
+         <item>Monthly Bills</item>
+    </string-array>
+
 
 </resources>
