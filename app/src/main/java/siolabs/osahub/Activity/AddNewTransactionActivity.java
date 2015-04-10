@@ -84,10 +84,12 @@ public class AddNewTransactionActivity extends ActionBarActivity {
         {
             Toast.makeText(this,"Transaction Failed", Toast.LENGTH_LONG).show();
             setResult(Activity.RESULT_OK);
+            finish();
         }
         else{
             Toast.makeText(this,"Transaction Added Successfully", Toast.LENGTH_LONG).show();
             setResult(Activity.RESULT_CANCELED);
+            finish();
         }
 
         
