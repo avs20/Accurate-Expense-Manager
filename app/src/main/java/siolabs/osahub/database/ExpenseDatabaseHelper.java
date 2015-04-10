@@ -94,8 +94,9 @@ public class ExpenseDatabaseHelper extends SQLiteOpenHelper {
                
                 list.add(t);
                 
-                cursor.moveToNext();
-                while(!cursor.isAfterLast()){
+
+                while(!cursor.isLast()){
+                    cursor.moveToNext();
                     t = new Transaction();
                     t.setAmount(cursor.getFloat(cursor.getColumnIndexOrThrow(COLUMN_TRANSACTION_AMOUNT)));
                     t.setCatName(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TRANSACTION_CATEGORY)));
@@ -103,7 +104,7 @@ public class ExpenseDatabaseHelper extends SQLiteOpenHelper {
                     t.setDateStr(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TRANSACTION_DATE)));
 
                     list.add(t);
-                    cursor.moveToNext();
+
                 }
             }
             cursor.close();
