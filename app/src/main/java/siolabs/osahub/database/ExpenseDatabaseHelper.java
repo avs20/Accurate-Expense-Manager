@@ -103,7 +103,7 @@ public class ExpenseDatabaseHelper extends SQLiteOpenHelper {
                     t.setDateStr(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TRANSACTION_DATE)));
 
                     list.add(t);
-                    
+                    cursor.moveToNext();
                 }
             }
             cursor.close();
