@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Accurate-Expense-Manager.iml" filepath="$PROJECT_DIR$/Accurate-Expense-Manager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BadMotherFucker.iml" filepath="$PROJECT_DIR$/BadMotherFucker.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

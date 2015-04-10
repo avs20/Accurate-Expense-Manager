@@ -54,8 +54,11 @@ public class ExpenseDatabaseHelper extends SQLiteOpenHelper {
         List<Account> list = new ArrayList<Account>();
         Cursor cursor = getReadableDatabase().query(TABLE_ACCOUNT,null,null,null,null,null,null);
 
-        if (cursor != null) {
+        if ((cursor.moveToFirst()) && cursor.getCount() !=0){
+
+
             cursor.moveToFirst();
+
             Account account = new Account();
             account.setAccountName(cursor.getString(cursor.getColumnIndexOrThrow(ExpenseDatabaseHelper.COLUMN_ACCOUNT_NAME)));
             account.setBalanceAmt(cursor.getFloat(cursor.getColumnIndexOrThrow(ExpenseDatabaseHelper.COLUMN_ACCOUNT_BALANCE)));
