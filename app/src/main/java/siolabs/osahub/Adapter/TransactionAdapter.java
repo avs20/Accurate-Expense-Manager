@@ -30,7 +30,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         this.transactionList = dbHelper.getTransaction(id);
     }
     
-    public void updateList(List<Transaction> data){
+    public void updateList(){
         
         transactionList = dbHelper.getTransaction(id);
         notifyDataSetChanged();

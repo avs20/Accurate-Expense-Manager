@@ -1,5 +1,6 @@
 package siolabs.osahub.Activity;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.support.v4.app.DialogFragment;
@@ -80,9 +81,15 @@ public class AddNewTransactionActivity extends ActionBarActivity {
         
         //TODO check if values is inserted correctly
         if(dbHelper.insertTransaction(t) <0)
+        {
             Toast.makeText(this,"Transaction Failed", Toast.LENGTH_LONG).show();
-        else
+            setResult(Activity.RESULT_OK);
+        }
+        else{
             Toast.makeText(this,"Transaction Added Successfully", Toast.LENGTH_LONG).show();
+            setResult(Activity.RESULT_CANCELED);
+        }
+
         
         
     }

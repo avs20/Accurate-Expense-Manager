@@ -65,6 +65,12 @@ public class ViewAllTransaction extends ActionBarActivity {
         startActivityForResult(i,0);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        ta.updateList();
+    }
+
+
     private List<Transaction> createTransaction(int i) {
         
         List<Transaction> tList = new ArrayList<Transaction>();
