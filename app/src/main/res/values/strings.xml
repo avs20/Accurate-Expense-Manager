@@ -23,6 +23,7 @@
          <item>Gifts</item>
          <item>Monthly Bills</item>
     </string-array>
+    <string name="title_activity_camera">CameraActivity</string>
 
 
 </resources>

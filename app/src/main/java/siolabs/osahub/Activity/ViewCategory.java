@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -39,6 +40,10 @@ public class ViewCategory extends ActionBarActivity {
         LinearLayoutManager accountLlm = new LinearLayoutManager(this);
         accountLlm.setOrientation(LinearLayoutManager.VERTICAL);
         accRecyclerView.setLayoutManager(accountLlm);
+
+
+
+
 
         dbHelper = new ExpenseDatabaseHelper(this);
         //category  testin

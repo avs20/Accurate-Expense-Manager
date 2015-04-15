@@ -145,7 +145,49 @@ public class ExpenseDatabaseHelper extends SQLiteOpenHelper {
 
         return catList;
     }
-    
+
+    //getTransaction by Category
+    public List<Transaction> getTransactionByCategory(String cat)
+    {
+        List<Transaction> list = new ArrayList<Transaction>();
+        Cursor cursor = null;
+        //if account is blank then get all transaction ordered by date
+        if(cat.length() < 1) {
+             cursor = getReadableDatabase().query(TABLE_TRANSACTION, null, null, null, null, null, null);
+        }else {
+            cursor = getReadableDatabase().query(TABLE_TRANSACTION, null,"name=", new String[]{cat},null,null,null );
+        }
+
+            if ((cursor.moveToFirst()) && cursor.getCount() !=0){
+                Transaction t = new Transaction();
+                t.setAmount(cursor.getFloat(cursor.getColumnIndexOrThrow(COLUMN_TRANSACTION_AMOUNT)));
+                t.setCatName(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TRANSACTION_CATEGORY)));
+                t.setAccName(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TRANSACTION_ACCOUNT)));
+                t.setDateStr(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TRANSACTION_DATE)));
+
+                list.add(t);
+
+
+                while(!cursor.isLast()){
+                    cursor.moveToNext();
+                    t = new Transaction();
+                    t.setAmount(cursor.getFloat(cursor.getColumnIndexOrThrow(COLUMN_TRANSACTION_AMOUNT)));
+                    t.setCatName(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TRANSACTION_CATEGORY)));
+                    t.setAccName(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TRANSACTION_ACCOUNT)));
+                    t.setDateStr(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TRANSACTION_DATE)));
+
+                    list.add(t);
+
+                }
+            }
+            cursor.close();
+
+
+
+        return list;
+    }
+
+
     public List<Transaction> getTransaction(String account)
     {
         List<Transaction> list = new ArrayList<Transaction>();

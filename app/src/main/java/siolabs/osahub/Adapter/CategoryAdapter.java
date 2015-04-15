@@ -1,6 +1,7 @@
 package siolabs.osahub.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import siolabs.osahub.Activity.ViewAllTransaction;
 import siolabs.osahub.Entity.Category;
 import siolabs.osahub.R;
 import siolabs.osahub.database.ExpenseDatabaseHelper;
@@ -44,7 +46,16 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         View itemView = LayoutInflater.
                 from(viewGroup.getContext()).
                 inflate(R.layout.account_category_layout, viewGroup, false);
+        final String name = categoryList.get(i).getCategoryName();
 
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ViewAllTransaction.class);
+                intent.putExtra("CAT_NAME",name);
+                 context.startActivity(intent);
+            }
+        });
         return new CategoryViewHolder(itemView);
     }
 
@@ -77,6 +88,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             catName = (TextView) itemView.findViewById(R.id.catNameTextView);
             expense = (TextView) itemView.findViewById(R.id.catAmountTextView);
             expenseText = (TextView) itemView.findViewById(R.id.catExpenseTextView);
+
 
         }
     }

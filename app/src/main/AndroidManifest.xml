@@ -7,8 +7,9 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+
         <activity
-            android:name="siolabs.osahub.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,21 +18,31 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="siolabs.osahub.Activity.ViewAccount"
+            android:name=".Activity.ViewAccount"
             android:label="@string/title_activity_view_account" >
         </activity>
         <activity
-            android:name="siolabs.osahub.Activity.ViewCategory"
+            android:name=".Activity.ViewCategory"
             android:label="@string/title_activity_view_account" >
         </activity>
         <activity
-            android:name="siolabs.osahub.Activity.ViewAllTransaction"
+            android:name=".Activity.ViewAllTransaction"
             android:label="@string/title_activity_view_all_transaction" >
         </activity>
+        
         <activity
-            android:name="siolabs.osahub.Activity.AddNewTransactionActivity"
-            android:label="@string/title_activity_add_new_transaction" >
+            android:name=".Activity.CameraActivity"
+            android:label="@string/title_activity_camera" >
+        </activity>
+        <activity
+            android:name=".Activity.AddNewTransactionActivity"
+            android:label="Add New Transaction" >
         </activity>
     </application>
+    <uses-feature android:name="android.hardware.camera"
+        android:required="true" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 </manifest>

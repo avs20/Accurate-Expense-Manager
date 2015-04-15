@@ -41,9 +41,12 @@ public class ViewAllTransaction extends ActionBarActivity {
         recyclerView.setLayoutManager(layoutManager);
         
         dbHelper = new ExpenseDatabaseHelper(this);
-        
+
+        String cat = getIntent().getStringExtra("CAT_NAME") ;
+        if(cat == null)
+            cat="";
         //setting the adapter
-        ta = new TransactionAdapter(this,dbHelper,"");
+        ta = new TransactionAdapter(this,dbHelper,cat);
         recyclerView.setAdapter(ta);
         
         
@@ -71,20 +74,6 @@ public class ViewAllTransaction extends ActionBarActivity {
     }
 
 
-    private List<Transaction> createTransaction(int i) {
-        
-        List<Transaction> tList = new ArrayList<Transaction>();
-        for(int j = 0; j < i ; j++){
-            Transaction t = new Transaction();
-            t.setCatName("Cat " + j);
-            t.setAmount(i+j*20);
-            t.setMemo("Memo " + j);
-            t.setDateStr("22/12/2015");
-            tList.add(t);
-        }
-        
-        return tList;
-    }
 
 
     @Override
